@@ -5,11 +5,32 @@ SoftwareSerial xbeeSerial(2,3);
 // LED array where each elemetn corresponds to a physical pin 
 int R = 8;
 int B = 9;
-int G = 10;
-int Y = 11;
+int G = 11;
+int Y = 12;
+
+#define RED 0
+#define GREEN 1
+#define BLUE 2
+#define YELLOW 3
+
+#define RED_ON        'A'
+#define RED_OFF       'B'
+#define GREEN_ON      'C'
+#define GREEN_OFF     'D'
+#define BLUE_ON       'E'
+#define BLUE_OFF      'F'
+#define YELLOW_ON     'G'
+#define YELLOW_OFF    'H'
+#define END_SIGNAL    'X'
+#define CHECK_RED     'I'
+#define CHECK_GREEN   'J'
+#define CHECK_BLUE    'K'
+#define CHECK_YELLOW  'L'
 
 // Global string 
-String command;
+char command;
+// [R,G,B,Y]
+char rgby_status[4] = {0,0,0,0};
 
 void setup() 
 {
@@ -35,94 +56,62 @@ void loop()
 
 void processXbee(void) 
 {
-    bool stringComplete = false;
-    int comma;
-    int newLine;
-    while (xbeeSerial.available() > 0)                                              // While loop to build the buffer of all chracters that are available (not if)
+    bool receivedCommand = false;
+    if (xbeeSerial.available() > 0)                                              // While loop to build the buffer of all chracters that are available (not if)
   {
-    char inChar = (char)xbeeSerial.read();
-    command += inChar;
-    if (inChar == '\n')
-    {
-      stringComplete = true;
-      break;
-    }
-  }
-    if (stringComplete)
-  {
-    //comma = command.indexOf(',');
-    //newLine = command.indexOf('\n');
-    //String ID = command.substring(0, (comma - 1));
-    char ID = command[0];
-    Serial.print("ID is: ");
-    Serial.println(ID);
-    //String subStringState = command.substring((comma + 1), (newLine - 1));           // MAKE THIS A PARSING FUNCTION
-    char subStringState = command[1];
-    Serial.print("The state:  ");
-    Serial.println(subStringState);
-    //int state = subStringState.toFloat();
-    int state = (subStringState - '0');
-    command = "";
-    stringComplete = false;
-
-    // Execute the command
-    // RED
-      if(ID == 'R')
-    {
-        if(state == 0)
-      {
+    command =  (char)xbeeSerial.read();
+    Serial.println("Command is: " + command);
+    switch(command){
+      case RED_OFF:
         digitalWrite(R,LOW);
-        xbeeSerial.print(0);
-      }
-        else if(state == 1)
-      {
+        rgby_status[RED] = 0;
+        break;
+      case RED_ON:
         digitalWrite(R,HIGH);
-        xbeeSerial.print(1);
-      }
-    }
-    // BLUE
-      if(ID == 'B')
-    {
-        if(state == 0)
-      {
-        digitalWrite(B,LOW);
-        xbeeSerial.print(0);
-      }
-        else if(state == 1)
-      {
-        digitalWrite(B,HIGH);
-        xbeeSerial.print(1);
-      }
-    }
-    // GREEN
-      if(ID == 'G')
-    {
-        if(state == 0)
-      {
-        digitalWrite(G,LOW);
-        xbeeSerial.print(0);
-      }
-        else if(state == 1)
-      {
+        rgby_status[RED] = 1;
+        break;
+      case GREEN_ON:
         digitalWrite(G,HIGH);
-        xbeeSerial.print(1);
-      }
-    }
-    // YELLOW
-      if(ID == 'Y')
-    {
-        if(state == 0)
-      {
-        digitalWrite(Y,LOW);
-        xbeeSerial.print(0);
-      }
-        else if(state == 1)
-      {
+        rgby_status[GREEN] = 1;
+        break;
+      case GREEN_OFF:
+        digitalWrite(G,LOW);
+        rgby_status[GREEN] = 0;
+        break;
+      case BLUE_ON:
+        digitalWrite(B,HIGH);
+        rgby_status[BLUE] = 1;
+        break;
+      case BLUE_OFF:
+        digitalWrite(B,LOW);
+        rgby_status[BLUE] = 0;
+        break;
+      case YELLOW_ON:
         digitalWrite(Y,HIGH);
-        xbeeSerial.print(1);
-      }
+        rgby_status[YELLOW] = 1;
+        break;
+      case YELLOW_OFF:
+         digitalWrite(Y,LOW);
+         rgby_status[YELLOW] = 0;
+         break;
+      case CHECK_RED:
+        xbeeSerial.print(rgby_status[RED]);
+        break;
+      case CHECK_GREEN:
+        xbeeSerial.print(rgby_status[GREEN]);
+      break;
+      case CHECK_BLUE:
+        xbeeSerial.print(rgby_status[BLUE]);
+      break;
+      case CHECK_YELLOW:
+        xbeeSerial.print(rgby_status[YELLOW]);
+      break;
+      default:
+        break;
     }
+    command = '\0';
   }
-}
+}   
+      
 
 // Make sure we send confirmation of the LED change back to the requestor 
