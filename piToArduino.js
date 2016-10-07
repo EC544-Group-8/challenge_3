@@ -1,8 +1,7 @@
 var SerialPort = require("serialport");
-var app = require('express')();
+var express = require('express');
+var app = express();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
-
 var portName = process.argv[2],
 portConfig = {
 	baudRate: 9600,
@@ -11,18 +10,10 @@ portConfig = {
 var sp;
 sp = new SerialPort.SerialPort(portName, portConfig);
 
+app.use(express.static(__dirname + '/public'));
+
 app.get('/', function(req, res){
   res.sendfile('index.html');
-});
-
-io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-  });
-  socket.on('chat message', function(msg){
-    io.emit('chat message', msg);
-    sp.write(msg + "\n");
-  });
 });
 
 http.listen(3000, function(){
