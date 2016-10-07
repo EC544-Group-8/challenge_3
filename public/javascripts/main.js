@@ -16,13 +16,18 @@ $(document).ready(function () {
 
 	// Function to change the status of the light
 	function change_led(event) {
-		alert(event.data.color);
-		alert(event.data.state);
+		if(event.data.state){
+			// Go to the route on the server that is designed to return change the led
+			$.get('/led_on/'+event.data.color, function(data) {});
+		} else {
+			$.get('/led_off/'+event.data.color, function(data) {});
+		}
+		
 	}
 
 	// Function to change the status of the light
 	function get_led_status(event) {
-		alert(event.data.color);
+		$.get('/get_status/'+event.data.color, function(data) {});
 	}
 
 	// On buttons, when clicked, will run the change_led function
