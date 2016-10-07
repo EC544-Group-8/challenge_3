@@ -15,10 +15,40 @@
                 </div>
             </div>
             <div class="row">
-              <button id="red" type="button" class="btn btn-danger disabled">Red</button>
-              <button id="green" type="button" class="btn btn-success">Green</button>
-              <button id="blue" type="button" class="btn btn-info">Blue</button>
-              <button id="yellow" type="button" class="btn btn-warning">Yellow</button>
+              <table class="table table-bordered">
+                <thead>
+                  <th>Turn On</th>
+                  <th>Turn Off</th>
+                  <th>Get Status</th>
+                  <th>Status</th>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><button id="red_on" type="button" class="btn btn-danger">Red</button></td>
+                    <td><button id="red_off" type="button" class="btn btn-danger">Red</button></td>
+                    <td><button id="red_status" type="button" class="btn btn-danger">Red</button></td>
+                    <td id="red_get_status">Unknown</td>
+                  </tr>
+                  <tr>
+                    <td><button id="green_on" type="button" class="btn btn-success">Green</button></td>
+                    <td><button id="green_off" type="button" class="btn btn-success">Green</button></td>
+                    <td><button id="green_status" type="button" class="btn btn-success">Green</button></td>
+                    <td id="green_get_status">Unknown</td>
+                  </tr>
+                  <tr>
+                    <td><button id="blue_on" type="button" class="btn btn-info">Blue</button></td>
+                    <td><button id="blue_off" type="button" class="btn btn-info">Blue</button></td>
+                    <td><button id="blue_status" type="button" class="btn btn-info">Blue</button></td>
+                    <td id="blue_get_status">Unknown</td>
+                  </tr>
+                  <tr>
+                    <td><button id="yellow_on" type="button" class="btn btn-warning">Yellow</button></td>
+                    <td><button id="yellow_off" type="button" class="btn btn-warning">Yellow</button></td>
+                    <td><button id="yellow_status" type="button" class="btn btn-warning">Yellow</button></td>
+                    <td id="yellow_get_status">Unknown</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
         </div>
         
