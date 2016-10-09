@@ -59,9 +59,18 @@ app.get('/led_off/yellow', function(req, res){
   sp.write('H');
 });
 
+var dataRx = false;
 // For getting the status 
 app.get('/get_status/red', function(req, res){
   sp.write('I');
+  while(!dataRx){
+    sp.on('data', function(data) {
+      current_status = read_status(data);
+      dataRx = true;
+    });
+  }
+  res.send(current_status);
+  dataRx = false;
 });
 
 // For getting the status 
@@ -80,11 +89,14 @@ app.get('/get_status/yellow', function(req, res){
 });
 
 
-
 // --------- END AJAX POST REQUESTS HERE --------- //
 
-
-
+var current_status;
+// Function to extract Arduino reponse 
+function read_status(datastring){
+  var data_status = parseFloat(datastring[0]);
+  return data_status
+}
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
@@ -96,4 +108,6 @@ sp.on("open", function () {
     alert('data received: ' + data);
   });
 });
+
+
 

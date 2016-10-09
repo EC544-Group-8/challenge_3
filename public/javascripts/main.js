@@ -27,7 +27,14 @@ $(document).ready(function () {
 
 	// Function to change the status of the light
 	function get_led_status(event) {
-		$.get('/get_status/'+event.data.color, function(data) {});
+		$.get('/get_status/'+event.data.color, function(data) {
+			if(data) { 
+				var ID = event.data.color + 'Rx';
+				$("#"+ID).html("It's On");
+			} else {
+				$("#"+ID).html("It's off");
+			}
+		});
 	}
 
 	// On buttons, when clicked, will run the change_led function
