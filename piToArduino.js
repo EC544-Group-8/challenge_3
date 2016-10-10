@@ -63,25 +63,13 @@ var dataRx = false;
 // For getting the status 
 app.get('/get_status/red', function(req, res){
   sp.write('I');
-  while(!dataRx){
-    sp.on('data', function(data) {
-      current_status = read_status(data);
-      dataRx = true;
-    });
-  }
+  console.log('trying to send current data: ');
   res.send(current_status);
-  dataRx = false;
 });
 
 // For getting the status 
 app.get('/get_status/green', function(req, res){
   sp.write('J');
-  while(!dataRx){
-    sp.on('data', function(data){
-      current_status = read_status(data);
-      dataRx = true;
-    });
-  }
   res.send(current_status);
   dataRx = false;
 });
@@ -89,38 +77,18 @@ app.get('/get_status/green', function(req, res){
 // For getting the status 
 app.get('/get_status/blue', function(req, res){
   sp.write('K');
-  while(!dataRx){
-    sp.on('data', function(data){
-      current_status = read_status(data);
-      dataRx = true;
-    }
-    res.send(current_status);
-    dataRx = false;
-  }
+  res.send(current_status);
 });
 
 // For getting the status 
 app.get('/get_status/yellow', function(req, res){
   sp.write('L');
-  while(!dataRx){
-    sp.on('data', function(data){
-      current_status = read_status(data);
-      dataRx = true;
-    });
-  }
   res.send(current_status);
-  dataRx = false;
 });
 
 
 // --------- END AJAX POST REQUESTS HERE --------- //
 
-var current_status;
-// Function to extract Arduino reponse 
-function read_status(datastring){
-  var data_status = parseFloat(datastring[0]);
-  return data_status
-}
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
@@ -129,9 +97,21 @@ http.listen(3000, function(){
 sp.on("open", function () {
   console.log('open');
   sp.on('data', function(data) {
-    alert('data received: ' + data);
+    console.log('data received: ');
+    current_status = data;
   });
 });
+
+
+
+var current_status = '1';
+// Function to extract Arduino reponse 
+function read_status(datastring){
+  console.log('the data sent back is: ');
+  console.log(datastring);
+  var data_status = parseFloat(datastring[0]);
+  return data_status
+}
 
 
 

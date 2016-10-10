@@ -18,8 +18,10 @@ $(document).ready(function () {
 	function change_led(event) {
 		if(event.data.state){
 			// Go to the route on the server that is designed to return change the led
+			console.log('Trying to turn LED on');
 			$.get('/led_on/'+event.data.color, function(data) {});
 		} else {
+			console.log('Trying to turn LED off');
 			$.get('/led_off/'+event.data.color, function(data) {});
 		}
 		
@@ -28,6 +30,9 @@ $(document).ready(function () {
 	// Function to change the status of the light
 	function get_led_status(event) {
 		$.get('/get_status/'+event.data.color, function(data) {
+			data = parseFloat(data);
+			console.log('the data we received is...');
+			console.log(data);
 			if(data) { 
 				var ID = event.data.color + 'Rx';
 				$("#"+ID).html("It's On");
