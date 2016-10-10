@@ -76,16 +76,40 @@ app.get('/get_status/red', function(req, res){
 // For getting the status 
 app.get('/get_status/green', function(req, res){
   sp.write('J');
+  while(!dataRx){
+    sp.on('data', function(data){
+      current_status = read_status(data);
+      dataRx = true;
+    });
+  }
+  res.send(current_status);
+  dataRx = false;
 });
 
 // For getting the status 
 app.get('/get_status/blue', function(req, res){
   sp.write('K');
+  while(!dataRx){
+    sp.on('data', function(data){
+      current_status = read_status(data);
+      dataRx = true;
+    }
+    res.send(current_status);
+    dataRx = false;
+  }
 });
 
 // For getting the status 
 app.get('/get_status/yellow', function(req, res){
   sp.write('L');
+  while(!dataRx){
+    sp.on('data', function(data){
+      current_status = read_status(data);
+      dataRx = true;
+    });
+  }
+  res.send(current_status);
+  dataRx = false;
 });
 
 
