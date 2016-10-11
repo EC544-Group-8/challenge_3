@@ -30,7 +30,7 @@ int Y = 12;
 // Global string 
 char command;
 // [R,G,B,Y]
-char rgby_status[4] = {0,0,0,0};
+int rgby_status[4] = {0,0,0,0};
 
 void setup() 
 {
@@ -95,16 +95,16 @@ void processXbee(void)
          rgby_status[YELLOW] = 0;
          break;
       case CHECK_RED:
-        xbeeSerial.print(rgby_status[RED]);
+        xbeeSerial.println(rgby_status[RED]);
         break;
       case CHECK_GREEN:
-        xbeeSerial.print(rgby_status[GREEN]);
+        xbeeSerial.println(rgby_status[GREEN]);
       break;
       case CHECK_BLUE:
-        xbeeSerial.print(rgby_status[BLUE]);
+        xbeeSerial.println(rgby_status[BLUE]);
       break;
       case CHECK_YELLOW:
-        xbeeSerial.print(rgby_status[YELLOW]);
+        xbeeSerial.println(rgby_status[YELLOW]);
       break;
       default:
         break;

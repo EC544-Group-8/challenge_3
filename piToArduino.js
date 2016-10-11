@@ -21,79 +21,122 @@ app.get('/', function(req, res){
 // --------- DEFINE AJAX POST REQUESTS HERE --------- //
 // For changing the led on
 app.get('/led_on/red', function(req, res){
+  console.log('sending command to Pi');
   sp.write('A');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_off/red', function(req, res){
+  console.log('sending command to Pi');
   sp.write('B');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_on/green', function(req, res){
+  console.log('sending command to Pi');
   sp.write('C');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_off/green', function(req, res){
+  console.log('sending command to Pi');
   sp.write('D');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_on/blue', function(req, res){
+  console.log('sending command to Pi');
   sp.write('E');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_off/blue', function(req, res){
+  console.log('sending command to Pi');
   sp.write('F');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_on/yellow', function(req, res){
+  console.log('sending command to Pi');
   sp.write('G');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_off/yellow', function(req, res){
+  console.log('sending command to Pi');
   sp.write('H');
+  res.send('1');
 });
 
 // For getting the status 
 app.get('/get_status/red', function(req, res){
   sp.write('I');
+  console.log('trying to send current data: ');
+  setTimeout(function() {
+    console.log('ok waited 1/2 sec...');
+    res.send(current_status);
+  },500);
 });
 
 // For getting the status 
 app.get('/get_status/green', function(req, res){
   sp.write('J');
+  console.log('trying to send current data: ');
+  setTimeout(function() {
+    console.log('ok waited 1/2 sec...');
+    res.send(current_status);
+  },500);
 });
 
 // For getting the status 
 app.get('/get_status/blue', function(req, res){
   sp.write('K');
+  console.log('trying to send current data: ');
+  setTimeout(function() {
+    console.log('ok waited 1/2 sec...');
+    res.send(current_status);
+  },500);;
 });
 
 // For getting the status 
 app.get('/get_status/yellow', function(req, res){
   sp.write('L');
+  console.log('trying to send current data: ');
+  setTimeout(function() {
+    console.log('ok waited 1/2 sec...');
+    res.send(current_status);
+  },500);
 });
 
 
-
 // --------- END AJAX POST REQUESTS HERE --------- //
-
-
 
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
+var current_status = '0';
+
 sp.on("open", function () {
   console.log('open');
   sp.on('data', function(data) {
-    alert('data received: ' + data);
+    console.log('data received: ');
+    console.log(data[0]);
+    current_status = data[0];
   });
 });
+
+
+
+
+
+
 
