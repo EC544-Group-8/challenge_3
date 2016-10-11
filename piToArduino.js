@@ -23,48 +23,56 @@ app.get('/', function(req, res){
 app.get('/led_on/red', function(req, res){
   console.log('sending command to Pi');
   sp.write('A');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_off/red', function(req, res){
   console.log('sending command to Pi');
   sp.write('B');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_on/green', function(req, res){
   console.log('sending command to Pi');
   sp.write('C');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_off/green', function(req, res){
   console.log('sending command to Pi');
   sp.write('D');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_on/blue', function(req, res){
   console.log('sending command to Pi');
   sp.write('E');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_off/blue', function(req, res){
   console.log('sending command to Pi');
   sp.write('F');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_on/yellow', function(req, res){
   console.log('sending command to Pi');
   sp.write('G');
+  res.send('1');
 });
 
 // For changing the led on
 app.get('/led_off/yellow', function(req, res){
   console.log('sending command to Pi');
   sp.write('H');
+  res.send('1');
 });
 
 // For getting the status 

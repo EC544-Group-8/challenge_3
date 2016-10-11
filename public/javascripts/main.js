@@ -19,10 +19,23 @@ $(document).ready(function () {
 		if(event.data.state){
 			// Go to the route on the server that is designed to return change the led
 			console.log('Trying to turn LED on');
-			$.get('/led_on/'+event.data.color, function(data) {});
+			$.get('/led_on/'+event.data.color, function(data) {
+				data = parseInt(data);
+				if(data > 0) { 
+					console.log('LED On worked');
+				} else {
+					console.log('LED ON did not worked');
+				}
+			});
 		} else {
 			console.log('Trying to turn LED off');
-			$.get('/led_off/'+event.data.color, function(data) {});
+			$.get('/led_off/'+event.data.color, function(data) {
+				if(data > 0) {
+					console.log('LED OFF worked');
+				} else {
+					console.log('LED OFF did not worked');
+				}
+			});
 		}
 		
 	}
