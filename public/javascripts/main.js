@@ -30,11 +30,11 @@ $(document).ready(function () {
 	// Function to change the status of the light
 	function get_led_status(event) {
 		$.get('/get_status/'+event.data.color, function(data) {
-			data = parseFloat(data);
-			console.log('the data we received is...');
+			console.log('Trying to get LED status...');
+			data = parseInt(data);
 			console.log(data);
-			if(data) { 
-				var ID = event.data.color + 'Rx';
+			var ID = event.data.color + 'Rx';
+			if(data > 0) { 
 				$("#"+ID).html("It's On");
 			} else {
 				$("#"+ID).html("It's off");

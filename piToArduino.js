@@ -59,31 +59,44 @@ app.get('/led_off/yellow', function(req, res){
   sp.write('H');
 });
 
-var dataRx = false;
 // For getting the status 
 app.get('/get_status/red', function(req, res){
   sp.write('I');
   console.log('trying to send current data: ');
-  res.send(current_status);
+  setTimeout(function() {
+    console.log('ok waited 1/2 sec...');
+    res.send(current_status);
+  },500);
 });
 
 // For getting the status 
 app.get('/get_status/green', function(req, res){
   sp.write('J');
-  res.send(current_status);
-  dataRx = false;
+  console.log('trying to send current data: ');
+  setTimeout(function() {
+    console.log('ok waited 1/2 sec...');
+    res.send(current_status);
+  },500);
 });
 
 // For getting the status 
 app.get('/get_status/blue', function(req, res){
   sp.write('K');
-  res.send(current_status);
+  console.log('trying to send current data: ');
+  setTimeout(function() {
+    console.log('ok waited 1/2 sec...');
+    res.send(current_status);
+  },500);;
 });
 
 // For getting the status 
 app.get('/get_status/yellow', function(req, res){
   sp.write('L');
-  res.send(current_status);
+  console.log('trying to send current data: ');
+  setTimeout(function() {
+    console.log('ok waited 1/2 sec...');
+    res.send(current_status);
+  },500);
 });
 
 
@@ -94,24 +107,20 @@ http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
+var current_status = '0';
+
 sp.on("open", function () {
   console.log('open');
   sp.on('data', function(data) {
     console.log('data received: ');
-    current_status = data;
+    console.log(data[0]);
+    current_status = data[0];
   });
 });
 
 
 
-var current_status = '1';
-// Function to extract Arduino reponse 
-function read_status(datastring){
-  console.log('the data sent back is: ');
-  console.log(datastring);
-  var data_status = parseFloat(datastring[0]);
-  return data_status
-}
+
 
 
 
