@@ -21,41 +21,49 @@ app.get('/', function(req, res){
 // --------- DEFINE AJAX POST REQUESTS HERE --------- //
 // For changing the led on
 app.get('/led_on/red', function(req, res){
+  console.log('sending command to Pi');
   sp.write('A');
 });
 
 // For changing the led on
 app.get('/led_off/red', function(req, res){
+  console.log('sending command to Pi');
   sp.write('B');
 });
 
 // For changing the led on
 app.get('/led_on/green', function(req, res){
+  console.log('sending command to Pi');
   sp.write('C');
 });
 
 // For changing the led on
 app.get('/led_off/green', function(req, res){
+  console.log('sending command to Pi');
   sp.write('D');
 });
 
 // For changing the led on
 app.get('/led_on/blue', function(req, res){
+  console.log('sending command to Pi');
   sp.write('E');
 });
 
 // For changing the led on
 app.get('/led_off/blue', function(req, res){
+  console.log('sending command to Pi');
   sp.write('F');
 });
 
 // For changing the led on
 app.get('/led_on/yellow', function(req, res){
+  console.log('sending command to Pi');
   sp.write('G');
 });
 
 // For changing the led on
 app.get('/led_off/yellow', function(req, res){
+  console.log('sending command to Pi');
   sp.write('H');
 });
 

@@ -43,22 +43,22 @@ $(document).ready(function () {
 	}
 
 	// On buttons, when clicked, will run the change_led function
-	red_on.on("click", {color: 'red', state: 1}, change_led);
-	green_on.on("click", {color: 'green', state: 1}, change_led);
-	blue_on.on("click", {color: 'blue', state: 1}, change_led);
-	yellow_on.on("click", {color: 'yellow', state: 1}, change_led);
+	red_on.click({color: 'red', state: 1}, change_led);
+	green_on.click({color: 'green', state: 1}, change_led);
+	blue_on.click({color: 'blue', state: 1}, change_led);
+	yellow_on.click({color: 'yellow', state: 1}, change_led);
 	
 	// Off buttons, when clicked, will run the change_led function
-	red_off.on("click", {color: 'red', state: 0}, change_led);
-	green_off.on("click", {color: 'green', state: 0}, change_led);
-	blue_off.on("click", {color: 'blue', state: 0}, change_led);
-	yellow_off.on("click", {color: 'yellow', state: 0}, change_led);
+	red_off.click({color: 'red', state: 0}, change_led);
+	green_off.click({color: 'green', state: 0}, change_led);
+	blue_off.click({color: 'blue', state: 0}, change_led);
+	yellow_off.click({color: 'yellow', state: 0}, change_led);
 	
 	// Get Status buttons, when clicked, will run the get_led_status function
-	red_status.on("click", {color: 'red'}, get_led_status);
-	green_status.on("click", {color: 'green'}, get_led_status);
-	blue_status.on("click", {color: 'blue'}, get_led_status);
-	yellow_status.on("click", {color: 'yellow'}, get_led_status);
+	red_status.click({color: 'red'}, get_led_status);
+	green_status.click({color: 'green'}, get_led_status);
+	blue_status.click({color: 'blue'}, get_led_status);
+	yellow_status.click({color: 'yellow'}, get_led_status);
 
 
 });
